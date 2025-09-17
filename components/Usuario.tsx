@@ -36,7 +36,7 @@ export default function Usuario({ id, nome, login, senha }: PropUsuario) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#84c8d5',
+    backgroundColor: '#1060cfff',
     padding: 15,
     borderRadius: 20,
     marginVertical: 8,

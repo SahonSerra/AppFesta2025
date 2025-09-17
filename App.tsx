@@ -7,6 +7,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './telas/Home';
 import ListarClientes from './telas/ListarClientes';
 import ListarUsuario from './telas/ListarUsuario';
+import CadCliente from './telas/CadCliente';
+import CadUsuario from './telas/CadUsuario';
 
 
 
@@ -15,6 +17,9 @@ const RootStack = createNativeStackNavigator({
     Home: Home,
     ListarClientes:ListarClientes,
     ListarUsuario:ListarUsuario,
+    CadCliente:CadCliente,
+    CadUsuario:CadUsuario,
+
    
 
   },

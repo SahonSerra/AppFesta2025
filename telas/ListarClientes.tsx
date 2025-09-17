@@ -37,8 +37,10 @@ export default function ListarClientes()
 
         <View style={styles.bloco}>
             <TouchableOpacity style={styles.btn}
-            onLongPress={()=>navigation.navigate('TelaCad' as never)}>
-                <Text style={styles.txtBtn}>Cadastrar Novo Cliente</Text>
+           >
+                <Text style={styles.txtBtn}
+                onPress={()=>navigation.navigate('CadCliente' as never)}
+                >Cadastrar Novo Cliente</Text>
             </TouchableOpacity>
         </View>
 

@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
 import {View, FlatList,  Text, StyleSheet, TouchableOpacity, ImageBackground, } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import api from '../components/Api';
 import Usuario from '../components/Usuario';
 
 export default function ListarUsuario() {
+
   const [dados, setDados] = useState<any[]>([]);
+
+  const navigation = useNavigation();
+  
 
   async function buscaUsuario() {
     try {
@@ -18,7 +23,7 @@ export default function ListarUsuario() {
 
   useEffect(() => {
     buscaUsuario();
-  }, []); // <-- importante colocar [] para não fazer loop infinito
+  }, []); 
 
   return (
     <>
@@ -29,7 +34,9 @@ export default function ListarUsuario() {
       />
 
       <View style={styles.bloco}>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn}
+        onPress={()=>navigation.navigate('CadUsuario' as never)}
+        >
           <Text style={styles.txtBtn}>Cadastrar Novo Usuário</Text>
         </TouchableOpacity>
 
@@ -63,6 +70,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: 'white',
     textDecorationLine: 'underline',
+    
   },
   btn: {
     backgroundColor: '#3e9bdd',
