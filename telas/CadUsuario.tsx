@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image,  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import api from '../components/Api';
@@ -57,10 +57,10 @@ export default function CadUsuario(){
                                 senha: senha,
                             });
                        
-                           alert(resp.data.message);
+                           alert(JSON.stringify(resp.data.message));
                            navigation.navigate('ListarUsuario' as never);
                         } catch{
-                            alert('Erro ao cadastrar cliente');
+                            alert('Erro ao cadastrar!!');
                         }
                     }}
                     >

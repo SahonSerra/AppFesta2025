@@ -32,7 +32,14 @@ export default function Home() {
           onPress={() => navigation.navigate('ListarUsuario' as never)}
           >
             <Text style={styles.usuario}>Usuarios</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.btnUsi}
+          onPress={() => navigation.navigate('Produtos' as never)}
+          >
+            <Text style={styles.usuario}>Produtos</Text>
           </TouchableOpacity>   
+   
 
           
         </View>

@@ -3,13 +3,15 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 
 interface PropCliente {
-  id: number;
-  nome: string;
-  cpf: string;
-  saldo: number;
+
+  id: number,
+  nome: string,
+  cpf: string,
+  saldo: number,
+  onDelete: (id:number) => void; // nova propriedade 
 }
 
-export default function Cliente({ id, nome, cpf, saldo }: PropCliente) {
+export default function Cliente({ id, nome, cpf, saldo, onDelete }: PropCliente) {
   return (
      
 
@@ -27,11 +29,13 @@ export default function Cliente({ id, nome, cpf, saldo }: PropCliente) {
       <Text style={styles.text}>Saldo: R$ {saldo}</Text>
 
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.btnExcluir}>
+        <TouchableOpacity style={styles.btnExcluir} onPress={()=>onDelete(id)}// Botão excluir 
+        >
           <Text style={styles.btnText}>Excluir</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnEditar}>
+        <TouchableOpacity style={styles.btnEditar} // Botão Editar
+        >
           <Text style={styles.btnText}>Editar</Text>
         </TouchableOpacity>
       </View>

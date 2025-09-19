@@ -57,7 +57,7 @@ export default function CadCliente() {
               saldo: saldo,
             });
 
-            alert(resp.data.message);
+            alert(JSON.stringify(resp.data.message));
             navigation.navigate('ListarClientes' as never);
           } catch {
             alert('Erro ao cadastrar cliente');

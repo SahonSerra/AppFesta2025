@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, FlatList, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, FlatList, Text, StyleSheet, TouchableOpacity, ImageBackground, Alert } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -11,14 +11,25 @@ export default function ListarClientes()
 //console.warn("test!") // exibi uma mensagem de API
  {
 
-    const [dados, setDados] = useState<any[]>([]);
+    const [cliente, setCliente] = useState<any[]>([]);
 
     const navigation = useNavigation();
 
     async function buscaClientes(){
-        const resposta = await api.get('clientes');
-        setDados(resposta.data);
+        const response = await api.get('clientes');
+        setCliente(response.data);
         
+    }
+
+    async function excluirCliente(id: number){
+      try{
+        await api.delete(`clientes/${id}`);
+        Alert.alert('Sucesso', 'Cliente excluído com sucesso!'); 
+        setCliente(cliente.filter(c => c.id !==id));
+      }
+      catch (error){
+        Alert.alert('Erro', 'Não foi possivel excluir o cliente');
+      }
     }
 
     useEffect(
@@ -39,8 +50,8 @@ export default function ListarClientes()
             <TouchableOpacity style={styles.btn}
            >
                 <Text style={styles.txtBtn}
-                onPress={()=>navigation.navigate('CadCliente' as never)}
-                >Cadastrar Novo Cliente</Text>
+                onPress={()=>navigation.navigate('CadCliente' as never)} // Botao cadastrar cliente
+                >Cadastrar Novo Cliente</Text> 
             </TouchableOpacity>
         </View>
 
@@ -48,9 +59,9 @@ export default function ListarClientes()
             <Text style={styles.titulo}> Lista de Clientes </Text>
 
             <FlatList 
-                data={dados}
+                data={cliente}
                 keyExtractor={(item)=>item.id}
-                renderItem={({item})=><Cliente nome={item.nome} cpf={item.cpf} saldo={item.saldo} id={item.id}/>}
+                renderItem={({item})=><Cliente nome={item.nome} cpf={item.cpf} saldo={item.saldo} id={item.id} onDelete={excluirCliente}/>}
                 style={styles.lista}
             />
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {View, FlatList,  Text, StyleSheet, TouchableOpacity, ImageBackground, } from 'react-native';
+import {View, FlatList,  Text, StyleSheet, TouchableOpacity, ImageBackground, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import api from '../components/Api';
@@ -7,17 +7,25 @@ import Usuario from '../components/Usuario';
 
 export default function ListarUsuario() {
 
-  const [dados, setDados] = useState<any[]>([]);
+  const [usuarios, setUsuario] = useState<any[]>([]);
 
   const navigation = useNavigation();
   
 
   async function buscaUsuario() {
-    try {
-      const resposta = await api.get('usuarios');
-      setDados(resposta.data);
-    } catch (error) {
-      console.error('Erro ao buscar usuários:', error);
+    const response = await api.get('usuarios');
+    setUsuario(response.data);     
+    
+  }
+
+  async function excluirUsuario(id: number){
+    try{
+      await api.delete(`usuarios/${id}`);
+      Alert.alert('Sucesso', 'Usuario excluído com sucesso!'); 
+      setUsuario(usuarios.filter(u => u.id !==id));
+    }
+    catch (error){
+      Alert.alert('Erro', 'Não foi possivel excluir o usuario');
     }
   }
 
@@ -44,7 +52,7 @@ export default function ListarUsuario() {
           <Text style={styles.titulo}> Lista de Usuários </Text>
 
           <FlatList
-            data={dados}
+            data={usuarios}
             keyExtractor={(item) => item.id.toString()} // precisa ser string
             renderItem={({ item }) => (
               <Usuario
@@ -52,6 +60,7 @@ export default function ListarUsuario() {
                 nome={item.nome}
                 login={item.login}
                 senha={item.senha}
+               onDelete={excluirUsuario}
               />
             )}
             style={styles.lista}

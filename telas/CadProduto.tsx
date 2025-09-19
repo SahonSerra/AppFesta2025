@@ -4,23 +4,12 @@ import { useNavigation } from '@react-navigation/native';
 
 import api from '../components/Api';
 
-import Cliente from '../components/Cliente'; //botão editar Cliente
+import Produto from '../components/Produtos';
 
-export default function EditarCliente(){
+export default function CadProtudo(){
 
-    
+        const navigation = useNavigation();
 
-    return(
-
-        <></>
-
-
-    );
-
-
-
-
-
-
+        //const []
 
 }

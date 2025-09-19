@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image,  } from 'react-native';
 
 interface PropUsuario {
-  id: number;
-  nome: string;
-  login: string;
-  senha: string;
+  id: number,
+  nome: string,
+  login: string,
+  senha: string,
+  onDelete:(id:number) =>void; // nova opção 
 }
 
-export default function Usuario({ id, nome, login, senha }: PropUsuario) {
+export default function Usuario({ id, nome, login, senha, onDelete }: PropUsuario) {
   return (
     <View style={styles.card}>
       <Image
@@ -22,11 +23,15 @@ export default function Usuario({ id, nome, login, senha }: PropUsuario) {
       <Text style={styles.text}>Senha: {senha}</Text>
 
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.btnExcluir}>
+        <TouchableOpacity style={styles.btnExcluir} onPress={()=>onDelete(id)}
+         // botão excluir 
+        >
           <Text style={styles.btnText}>Excluir</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnEditar}>
+        <TouchableOpacity style={styles.btnEditar}
+        // botão editar 
+        >
           <Text style={styles.btnText}>Editar</Text>
         </TouchableOpacity>
       </View>
